@@ -11,7 +11,7 @@ import {
   Moon,
 } from '../icons';
 
-const Sidebar = ({ currentPage, setCurrentPage, onLogout }) => {
+const Sidebar = ({ currentPage, setCurrentPage, onLogout, mobileOpen, setMobileOpen }) => {
   const { colors, theme, toggleTheme } = useTheme();
   
   const navItems = [
@@ -24,12 +24,12 @@ const Sidebar = ({ currentPage, setCurrentPage, onLogout }) => {
 
   return (
     <aside 
-      className="flex flex-col w-64 h-screen px-4 py-8"
+      className={`flex flex-col w-56 md:w-64 h-screen px-3 md:px-4 py-6 md:py-8 md:static fixed top-0 left-0 z-40 transform transition-transform duration-200 ${mobileOpen ? 'translate-x-0' : '-translate-x-full'} md:translate-x-0`}
       style={{ backgroundColor: colors.sidebarBg, borderRight: `1px solid ${colors.border}` }}
     >
-      <div className="flex items-center justify-between px-4 mb-10">
+      <div className="flex items-center justify-between px-2 md:px-4 mb-6 md:mb-10">
         <div className="flex items-center">
-          <span className="text-xl font-bold tracking-tight" style={{ color: colors.sidebarText }}>
+          <span className="text-lg md:text-xl font-bold tracking-tight" style={{ color: colors.sidebarText }}>
             Bridgebound College Portal
           </span>
         </div>
@@ -50,8 +50,8 @@ const Sidebar = ({ currentPage, setCurrentPage, onLogout }) => {
             return (
               <button
                 key={item.id}
-                onClick={() => setCurrentPage(item.id)}
-                className="flex items-center w-full px-4 py-3 rounded-lg transition-all duration-200"
+                onClick={() => { setCurrentPage(item.id); setMobileOpen && setMobileOpen(false); }}
+                className="flex items-center w-full px-3 md:px-4 py-3 rounded-lg transition-all duration-200"
                 style={{
                   color: isActive ? colors.sidebarActive : colors.sidebarText,
                   backgroundColor: isActive ? colors.sidebarHover : 'transparent',
@@ -69,7 +69,7 @@ const Sidebar = ({ currentPage, setCurrentPage, onLogout }) => {
         <div>
           <button
             onClick={onLogout}
-            className="flex items-center w-full px-4 py-3 rounded-lg transition-all duration-200"
+            className="flex items-center w-full px-3 md:px-4 py-3 rounded-lg transition-all duration-200"
             style={{ color: colors.sidebarText }}
             onMouseEnter={(e) => e.currentTarget.style.backgroundColor = colors.sidebarHover}
             onMouseLeave={(e) => e.currentTarget.style.backgroundColor = 'transparent'}

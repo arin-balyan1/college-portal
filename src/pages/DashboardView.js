@@ -81,7 +81,7 @@ const DashboardView = () => {
         </div>
       </div>
       
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6">
         <div 
           className="p-6 rounded-xl shadow-sm border transition-all duration-200 hover:shadow-md"
           style={{ 
@@ -125,7 +125,7 @@ const DashboardView = () => {
         </div>
       </div>
       
-      <div className="mt-10 grid grid-cols-1 lg:grid-cols-2 gap-6">
+      <div className="mt-10 grid grid-cols-1 lg:grid-cols-2 gap-4 md:gap-6">
         {/* Recent Applicants */}
         <div 
           className="p-6 rounded-xl shadow-sm border"

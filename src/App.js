@@ -17,6 +17,7 @@ function App() {
   // --- State Management ---
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [currentPage, setCurrentPage] = useState('dashboard');
+  const [mobileSidebarOpen, setMobileSidebarOpen] = useState(false);
   
   // Default criteria
   const [criteria, setCriteria] = useState({
@@ -83,15 +84,36 @@ function App() {
 
   return (
     <div className="flex" style={{ backgroundColor: colors.background }}>
+      {/* Mobile overlay */}
+      {mobileSidebarOpen && (
+        <div
+          className="fixed inset-0 z-30 md:hidden"
+          style={{ backgroundColor: 'rgba(0,0,0,0.4)' }}
+          onClick={() => setMobileSidebarOpen(false)}
+        />
+      )}
       <Sidebar
         currentPage={currentPage}
         setCurrentPage={setCurrentPage}
         onLogout={handleLogout}
+        mobileOpen={mobileSidebarOpen}
+        setMobileOpen={setMobileSidebarOpen}
       />
       <main
-        className="flex-1 h-screen overflow-y-auto p-8"
+        className="flex-1 min-h-screen overflow-y-auto p-4 md:p-8"
         style={{ color: colors.textPrimary }}
       >
+        {/* Mobile topbar */}
+        <div className="md:hidden mb-4">
+          <button
+            aria-label="Open menu"
+            className="px-3 py-2 rounded-lg text-white"
+            style={{ backgroundColor: colors.primary }}
+            onClick={() => setMobileSidebarOpen(true)}
+          >
+            Menu
+          </button>
+        </div>
         {renderPage()}
       </main>
     </div>
